@@ -1,28 +1,31 @@
-sudo -s
+```sudo -s```
 
 /* Stop restart required prompt for Ubuntu22 */
 Source:  <a href="https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i">stackoverflow</a>
 
-sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
+```sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf```
 
 /* update and upgrade */
-apt update && apt upgrade -y && apt dist-upgrade && apt autoclean && apt autoremove -y && reboot
+```apt update && apt upgrade -y && apt dist-upgrade && apt autoclean && apt autoremove -y && reboot```
 
 /* Install Nginx */
-apt install nginx -y && chown -R www-data:www-data /var/www/ && chmod -R 755 /var/www
+```apt install nginx -y && chown -R www-data:www-data /var/www/ && chmod -R 755 /var/www```
 
 /* updates , firewall and nginx */
 
+```
 ufw enable
+
 ufw allow ssh
 ufw allow 'Nginx Full'
-systemctl restart nginx
+systemctl restart nginx```
 
 
 /* Install and optimize PHP */
-
+```
 sudo add-apt-repository ppa:ondrej/php -y && apt update && apt install php8.2-fpm php8.2-common php8.2-mysql php8.2-xml php8.2-xmlrpc php8.2-curl php8.2-gd php8.2-imagick php8.2-cli php8.2-dev php8.2-imap php8.2-mbstring php8.2-soap php8.2-zip php8.2-bcmath -y && sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/8.2/fpm/php.ini && service php8.2-fpm restart  
-
+```
+```
 sed -i 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php/8.2/fpm/php.ini
 sed -i 's/post_max_size = 8M/post_max_size = 128M/g' /etc/php/8.2/fpm/php.ini
 sed -i 's/max_file_uploads = 20/max_file_uploads = 30/g' /etc/php/8.2/fpm/php.ini
@@ -30,10 +33,11 @@ sed -i 's/max_execution_time = 30/max_execution_time = 900/g' /etc/php/8.2/fpm/p
 sed -i 's/max_input_time = 60/max_input_time = 3000/g' /etc/php/8.2/fpm/php.ini
 sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 128M/g' /etc/php/8.2/fpm/php.ini
 service php8.2-fpm restart
-
+```
 
 /* Add server block */
 
+```
 rm /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
 
@@ -50,6 +54,7 @@ mkdir public_html
 
 cd /etc/nginx/sites-available/
 nano example.com
+```
 
 --------------------------------------------------------------------------------------------
 ```
