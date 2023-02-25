@@ -52,6 +52,7 @@ cd /etc/nginx/sites-available/
 nano example.com
 
 --------------------------------------------------------------------------------------------
+```
 fastcgi_cache_path /var/www/example.com/cache levels=1:2 keys_zone=example.com:100m inactive=60m;
 
 server {
@@ -137,6 +138,7 @@ location = /favicon.ico {
     log_not_found off;
   }
 }
+```
 
 ==================================== for Gzip Add at the mid of server block =========================================
 
