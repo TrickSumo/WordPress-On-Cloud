@@ -1,8 +1,8 @@
 sudo -s
 
 /* Stop restart required prompt for Ubuntu22 */
-Source: [stackoverflow](https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i)
-[GitHub Pages](https://pages.github.com/)
+Source:  <a href="https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i">stackoverflow</a>
+
 sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
 
 /* update and upgrade */
