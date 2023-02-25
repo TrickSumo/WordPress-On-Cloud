@@ -1,10 +1,3 @@
-/* To add new SFTP user */
-adduser ubuntu                       
-usermod -aG sudo ubuntu              
-sudo groupadd wwwubuntu                  
-sudo usermod -a -G wwwubuntu ubuntu      
-sudo usermod -a -G wwwubuntu www-data    
-
 sudo -s
 
 /* Stop restart required prompt for Ubuntu22 */
@@ -271,9 +264,16 @@ Plugin to purge fastcgi cache
 sed -i "s/define( 'WP_DEBUG', false );/define( 'WP_DEBUG', false );define( 'RT_WP_NGINX_HELPER_CACHE_PATH', '\/var\/www\/example.com\/cache' );/" /var/www/example.com/wordpress/public_html/wp-config.php
 
 
-
-
 /* to make sftp edit/upload work */
+/* To add new SFTP user */
+
+adduser ubuntu                       
+usermod -aG sudo ubuntu              
+sudo groupadd wwwubuntu                  
+sudo usermod -a -G wwwubuntu ubuntu      
+sudo usermod -a -G wwwubuntu www-data    
+
+
 sudo chgrp -R wwwubuntu /var/www/example.com/wordpress/public_html
 sudo find /var/www/example.com/wordpress/public_html -type d -exec chmod 775 {} \;
 sudo find /var/www/example.com/wordpress/public_html -type f -exec chmod 664 {} \;
