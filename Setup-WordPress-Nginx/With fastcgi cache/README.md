@@ -1,15 +1,24 @@
-```sudo -s```
+
+```
+sudo -s
+```
 
 /* Stop restart required prompt for Ubuntu22 */
 [Source](https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i)
 
-```sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf```
+```
+sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
+```
 
 /* update and upgrade */
-```apt update && apt upgrade -y && apt dist-upgrade && apt autoclean && apt autoremove -y && reboot```
+```
+apt update && apt upgrade -y && apt dist-upgrade && apt autoclean && apt autoremove -y && reboot
+```
 
 /* Install Nginx */
-```apt install nginx -y && chown -R www-data:www-data /var/www/ && chmod -R 755 /var/www```
+```
+apt install nginx -y && chown -R www-data:www-data /var/www/ && chmod -R 755 /var/www
+```
 
 /* updates , firewall and nginx */
 
@@ -148,7 +157,9 @@ location = /favicon.ico {
 
 /* Enable Gzip */
 
-```nano /etc/nginx/nginx.conf```
+```
+nano /etc/nginx/nginx.conf
+```
 
 Seach for line "gzip on" and replace that by code below:-
 
