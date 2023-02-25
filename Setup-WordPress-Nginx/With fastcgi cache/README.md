@@ -1,7 +1,7 @@
 ```sudo -s```
 
 /* Stop restart required prompt for Ubuntu22 */
-Source:  <a href="https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i">stackoverflow</a>
+[Source](https://stackoverflow.com/questions/73397110/how-to-stop-ubuntu-pop-up-daemons-using-outdated-libraries-when-using-apt-to-i)
 
 ```sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf```
 
@@ -19,7 +19,7 @@ ufw enable
 ufw allow ssh
 ufw allow 'Nginx Full'
 systemctl restart nginx```
-
+```
 
 /* Install and optimize PHP */
 ```
@@ -55,6 +55,7 @@ mkdir public_html
 cd /etc/nginx/sites-available/
 nano example.com
 ```
+
 
 --------------------------------------------------------------------------------------------
 ```
@@ -145,13 +146,13 @@ location = /favicon.ico {
 }
 ```
 
-==================================== for Gzip Add at the mid of server block =========================================
+/* Enable Gzip */
 
-nano /etc/nginx/nginx.conf
+```nano /etc/nginx/nginx.conf```
 
+Seach for line "gzip on" and replace that by code below:-
 
-
-
+```
 # Enable Gzip compression.
 gzip on;
 
@@ -212,48 +213,57 @@ fastcgi_cache_key "$scheme$request_method$host$request_uri";
 add_header Fastcgi-Cache $upstream_cache_status;
 fastcgi_cache_use_stale error timeout invalid_header http_500;
 fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+```
+---------------------------------------------------------------------------
 
-========================================================================================================================
-
-
+```
 ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 sudo nginx -t
 service php8.2-fpm restart
 service nginx restart
+```
 
 /*Test nginx and php */
+```
 echo "<?php phpinfo(); ?>" >> /var/www/html/info.php
 rm -rf /var/www/html/info.php
+```
 
 
 /* Install SSL */
+```
 apt-get install python3-certbot-nginx
 certbot --nginx -d new.example.com
+```
 
+```
 sudo crontab -e
 0 0,12 * * * certbot renew >/dev/null 2>&1
+```
 
 
 /* Enable HTTP2 */
-
+```
 sudo nano /etc/nginx/sites-available/example
 listen 443 ssl http2 default_server;
 listen [::]:443 ssl http2 default_server;
-
+```
 
 
 /* Install and configure mariadb */
-
+```
 sudo apt install mariadb-server -y && sudo mysql_secure_installation && mysql -u root -p
 create database myblog1;
 CREATE USER myuser1@localhost IDENTIFIED BY 'Secure2018#';
 GRANT ALL PRIVILEGES ON myblog1.* TO myuser1@localhost;
 FLUSH PRIVILEGES;
 exit;
+```
 
 
 /* Download and install WordPress */
 
+```
 cd /var/www/example.com/wordpress/public_html
 
 wget https://wordpress.org/latest.tar.gz
@@ -262,19 +272,26 @@ mv -v wordpress/* /var/www/example.com/wordpress/public_html
 rmdir wordpress
 rm latest.tar.gz
 
-
 sudo chown -R www-data:www-data /var/www/
 sudo find /var/www/ -type d -exec chmod 755 {} \;
 sudo find /var/www/ -type f -exec chmod 644 {} \;
 
+apt-get update
+service nginx restart
+systemctl restart php8.2-fpm.service
+systemctl restart mysql
+
+```
 
 Plugin to purge fastcgi cache
+```
 sed -i "s/define( 'WP_DEBUG', false );/define( 'WP_DEBUG', false );define( 'RT_WP_NGINX_HELPER_CACHE_PATH', '\/var\/www\/example.com\/cache' );/" /var/www/example.com/wordpress/public_html/wp-config.php
+```
 
 
 /* to make sftp edit/upload work */
 /* To add new SFTP user */
-
+```
 adduser ubuntu                       
 usermod -aG sudo ubuntu              
 sudo groupadd wwwubuntu                  
@@ -285,12 +302,8 @@ sudo usermod -a -G wwwubuntu www-data
 sudo chgrp -R wwwubuntu /var/www/example.com/wordpress/public_html
 sudo find /var/www/example.com/wordpress/public_html -type d -exec chmod 775 {} \;
 sudo find /var/www/example.com/wordpress/public_html -type f -exec chmod 664 {} \;
+```
 
-
-apt-get update
-service nginx restart
-systemctl restart php8.2-fpm.service
-systemctl restart mysql
 
 
 
