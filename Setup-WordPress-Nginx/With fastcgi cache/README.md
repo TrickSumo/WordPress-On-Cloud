@@ -236,8 +236,8 @@ service nginx restart
 
 /*Test nginx and php */
 ```
-echo "<?php phpinfo(); ?>" >> /var/www/html/info.php
-rm -rf /var/www/html/info.php
+echo "<?php phpinfo(); ?>" >> /var/www/example.com/wordpress/public_html/info.php
+rm -rf /var/www/example.com/wordpress/public_html/info.php
 ```
 
 
