@@ -1,9 +1,12 @@
 /* Add a record and cname record at domain name control panel */
+```
 ;; A Records
 @	     IP-address-of-server
 ;; CNAME Records
 www	     example.com
+```
 
+![image](https://user-images.githubusercontent.com/26363918/221420944-7428c61d-a5ab-4995-91b7-4ad37b9ac3b8.png)
 
 ```
 sudo -s
@@ -210,7 +213,7 @@ sudo crontab -e
 
 /* Enable HTTP2 */
 ```
-sudo nano /etc/nginx/sites-available/example
+sudo nano /etc/nginx/sites-available/example.com
 listen 443 ssl http2 default_server;
 listen [::]:443 ssl http2 default_server;
 ```
