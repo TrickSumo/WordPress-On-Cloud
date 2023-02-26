@@ -27,7 +27,7 @@ ufw enable
 
 ufw allow ssh
 ufw allow 'Nginx Full'
-systemctl restart nginx```
+systemctl restart nginx
 ```
 
 /* Install and optimize PHP */
