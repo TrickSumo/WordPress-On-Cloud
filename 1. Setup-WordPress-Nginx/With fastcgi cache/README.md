@@ -4,6 +4,8 @@
 ;; CNAME Records
 www	     example.com
 
+![image](https://user-images.githubusercontent.com/26363918/221420944-7428c61d-a5ab-4995-91b7-4ad37b9ac3b8.png)
+
 
 ```
 sudo -s
