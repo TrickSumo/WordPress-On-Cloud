@@ -1,3 +1,9 @@
+/* Add a record and cname record at domain name control panel */
+;; A Records
+@	     IP-address-of-server
+;; CNAME Records
+www	     example.com
+
 
 
 /* Add server block for new site*/
